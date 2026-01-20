@@ -234,19 +234,19 @@ const Home: React.FC = () => {
             </div>
 
             {/* Category Filter */}
-            <div className="w-full lg:w-auto overflow-x-auto pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
-              <div className="flex lg:flex-wrap gap-3 bg-white p-2 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 w-max lg:w-auto mx-auto lg:mx-0">
+            <div className="w-full lg:w-auto mt-6 lg:mt-0">
+              <div className="grid grid-cols-2 lg:flex lg:flex-wrap gap-2 sm:gap-3 bg-white p-2 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 w-full lg:w-auto">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActiveTab(cat.id as any)}
-                    className={`flex items-center gap-3 px-6 py-4 rounded-[1.5rem] text-sm font-bold transition-all duration-300 relative overflow-hidden group ${activeTab === cat.id
-                        ? 'bg-slate-900 text-white shadow-lg scale-100'
-                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                    className={`flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-2 sm:gap-3 px-3 sm:px-6 py-3 sm:py-4 rounded-[1.5rem] text-sm font-bold transition-all duration-300 relative overflow-hidden group ${activeTab === cat.id
+                      ? 'bg-slate-900 text-white shadow-lg scale-100'
+                      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                       }`}
                   >
-                    <span className={`text-2xl transition-transform duration-300 ${activeTab === cat.id ? 'scale-110' : 'grayscale group-hover:grayscale-0'}`}>{cat.icon}</span>
-                    <span className="uppercase tracking-wide">{cat.label}</span>
+                    <span className={`text-xl sm:text-2xl transition-transform duration-300 ${activeTab === cat.id ? 'scale-110' : 'grayscale group-hover:grayscale-0'}`}>{cat.icon}</span>
+                    <span className="uppercase tracking-wide text-[10px] sm:text-sm text-center sm:text-left">{cat.label}</span>
                   </button>
                 ))}
               </div>
@@ -363,7 +363,7 @@ const Home: React.FC = () => {
 
               <button
                 onClick={() => setSelectedInfo(null)}
-                className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all backdrop-blur-md"
+                className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all backdrop-blur-md z-50"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>

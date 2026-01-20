@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ProductData, DetailedIllness } from '../types';
 
 interface ProductViewProps {
@@ -255,57 +256,88 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
                   ))}
                 </div>
 
-                {/* Illness Detail Modal/Panel */}
-                {selectedIllness && (
-                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
-                    <div className="bg-white rounded-[2rem] max-w-2xl w-full p-8 text-slate-900 shadow-2xl relative overflow-hidden">
-                      <button
-                        onClick={() => setSelectedIllness(null)}
-                        className="absolute top-6 right-6 p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-all text-slate-500"
-                      >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                      </button>
+                {/* Illness Detail Modal/Panel - PORTAL UPDATE */}
+                {selectedIllness && createPortal(
+                  <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
+                    {/* Backdrop */}
+                    <div
+                      className="absolute inset-0 bg-slate-900/60 backdrop-blur-xl transition-opacity animate-fadeIn"
+                      onClick={() => setSelectedIllness(null)}
+                    ></div>
 
-                      <div className="mb-6">
-                        <span className="text-orange-500 font-black text-xs uppercase tracking-widest">Tıbbi Tanım & Eğitim Kartı</span>
-                        <h4 className="text-3xl font-black mt-1">{selectedIllness.name}</h4>
-                      </div>
+                    {/* Modal Content */}
+                    <div className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative overflow-hidden animate-cardIn z-10 flex flex-col max-h-[90vh] border border-white/20">
 
-                      <div className="space-y-6">
-                        <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                          <h5 className="font-black text-xs text-slate-400 uppercase tracking-widest mb-2">Nedir? (Tıbbi Tanım)</h5>
-                          <p className="text-slate-700 leading-relaxed font-medium">{selectedIllness.description}</p>
+                      {/* Header */}
+                      <div className="bg-slate-900 shrink-0 h-28 flex items-center px-8 relative overflow-hidden">
+                        {/* Decor */}
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/20 rounded-full blur-[50px] -mr-10 -mt-20"></div>
+
+                        <div className="relative z-10 flex items-center gap-6 w-full pr-12">
+                          <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg ring-4 ring-white/10 shrink-0">
+                            🩺
+                          </div>
+                          <div>
+                            <span className="block text-orange-400 font-bold text-[10px] uppercase tracking-[0.2em] mb-1 opacity-80">TIBBİ TANIM & EĞİTİM KARTI</span>
+                            <h4 className="text-2xl sm:text-3xl font-black text-white leading-none tracking-tight">{selectedIllness.name}</h4>
+                          </div>
                         </div>
 
+                        <button
+                          onClick={() => setSelectedIllness(null)}
+                          className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all backdrop-blur-md z-50"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-8 sm:p-10 overflow-y-auto no-scrollbar flex-1 bg-white space-y-8">
+
+                        {/* Definition */}
+                        <div className="bg-slate-50 p-6 sm:p-8 rounded-[2rem] border border-slate-100 group hover:border-orange-200 transition-colors">
+                          <h5 className="font-black text-[10px] text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                            Nedir? (Tıbbi Tanım)
+                          </h5>
+                          <p className="text-slate-700 leading-relaxed font-bold text-lg">{selectedIllness.description}</p>
+                        </div>
+
+                        {/* Exclusions */}
                         {selectedIllness.exclusions && (
-                          <div className="bg-red-50 p-6 rounded-2xl border border-red-100">
-                            <h5 className="font-black text-xs text-red-400 uppercase tracking-widest mb-2">Kapsam Dışı Haller (Ödeme Yapılmaz)</h5>
-                            <p className="text-red-800 leading-relaxed text-sm italic">
-                              {selectedIllness.exclusions}
+                          <div className="bg-red-50 p-6 sm:p-8 rounded-[2rem] border border-red-100">
+                            <h5 className="font-black text-[10px] text-red-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                              Kapsam Dışı Haller (Ödeme Yapılmaz)
+                            </h5>
+                            <p className="text-red-900 leading-relaxed text-sm font-medium italic">
+                              "{selectedIllness.exclusions}"
                             </p>
                           </div>
                         )}
 
-                        <div className="flex gap-4">
-                          <div className="flex-1 bg-orange-50 p-4 rounded-xl">
-                            <span className="block text-[10px] font-black text-orange-400 uppercase">Tazminat Tutarı</span>
-                            <span className="text-orange-700 font-bold">Vefat Bedelinin 2 Katı</span>
+                        {/* Info Grid */}
+                        <div className="flex flex-col sm:flex-row gap-4">
+                          <div className="flex-1 bg-orange-50 p-5 rounded-3xl border border-orange-100">
+                            <span className="block text-[10px] font-black text-orange-400 uppercase tracking-widest mb-1">Tazminat Tutarı</span>
+                            <span className="text-orange-900 font-black text-xl">Vefat Bedelinin 2 Katı</span>
                           </div>
-                          <div className="flex-1 bg-blue-50 p-4 rounded-xl">
-                            <span className="block text-[10px] font-black text-blue-400 uppercase">Bekleme Şartı</span>
-                            <span className="text-blue-700 font-bold">30 Gün Yaşam</span>
+                          <div className="flex-1 bg-blue-50 p-5 rounded-3xl border border-blue-100">
+                            <span className="block text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Bekleme Şartı</span>
+                            <span className="text-blue-900 font-black text-xl">30 Gün Yaşam</span>
                           </div>
                         </div>
-                      </div>
 
-                      <button
-                        onClick={() => setSelectedIllness(null)}
-                        className="w-full mt-8 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-slate-800 transition-all"
-                      >
-                        ANLADIM, KAPAT
-                      </button>
+                        <button
+                          onClick={() => setSelectedIllness(null)}
+                          className="w-full py-5 bg-slate-900 text-white font-black rounded-2xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/10 active:scale-[0.98] uppercase tracking-widest text-xs"
+                        >
+                          BİLGİYİ CEBE ATTIM 👍
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </div>,
+                  document.body
                 )}
               </div>
             )}
