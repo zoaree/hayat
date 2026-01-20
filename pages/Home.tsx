@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface InfoItem {
   id: string;
@@ -194,8 +194,9 @@ const Home: React.FC = () => {
     if (selectedInfo) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
     }
+    return () => { document.body.style.overflow = ''; };
   }, [selectedInfo]);
 
   const categories = [
@@ -206,36 +207,46 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-['Inter']">
-      {/* Header Area */}
-      <div className="bg-slate-900 pt-20 pb-28 px-4 sm:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-orange-500/10 rounded-full blur-[80px] sm:blur-[100px]"></div>
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 sm:gap-6">
-            <div className="text-center lg:text-left">
-              <div className="inline-block px-3 py-1 bg-orange-500/20 text-orange-400 rounded-lg text-[10px] font-black uppercase tracking-widest mb-4 border border-orange-500/30">
+    <div className="font-['Inter'] relative min-h-screen">
+      {/* Dynamic Backgrounds */}
+      <div className="fixed top-0 left-0 w-full h-[500px] bg-gradient-to-b from-slate-100 to-transparent -z-10"></div>
+
+      {/* Header Section */}
+      <div className="pt-12 sm:pt-20 pb-16 px-4 sm:px-8">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+            {/* Title Area */}
+            <div className="relative">
+              <div className="absolute -top-12 -left-12 w-48 h-48 bg-orange-400/20 rounded-full blur-3xl opacity-50"></div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-900 text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 shadow-xl shadow-slate-900/10">
+                <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
                 ViennaLife Akademi v4.0
               </div>
-              <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight tracking-tight">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-slate-900 leading-[0.9] tracking-tight">
                 Danışman <br />
-                <span className="text-orange-500">Bilgi Kütüphanesi</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-400">
+                  Bilgi Kütüphanesi
+                </span>
               </h1>
+              <p className="mt-6 text-lg text-slate-500 font-medium max-w-lg leading-relaxed">
+                Sahadaki gücünüzü artıracak teknik, hukuki ve satış stratejileri tek bir merkezde.
+              </p>
             </div>
 
-            {/* Scrollable Categories for Mobile */}
-            <div className="w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
-              <div className="flex flex-nowrap lg:flex-wrap gap-2 p-1.5 bg-white/5 backdrop-blur-xl rounded-[2rem] border border-white/10 w-max mx-auto lg:mx-0">
+            {/* Category Filter */}
+            <div className="w-full lg:w-auto overflow-x-auto pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0">
+              <div className="flex lg:flex-wrap gap-3 bg-white p-2 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 w-max lg:w-auto mx-auto lg:mx-0">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActiveTab(cat.id as any)}
-                    className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-2xl text-xs sm:text-sm font-black transition-all whitespace-nowrap ${activeTab === cat.id
-                      ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
-                      : 'text-slate-400 hover:text-white'
+                    className={`flex items-center gap-3 px-6 py-4 rounded-[1.5rem] text-sm font-bold transition-all duration-300 relative overflow-hidden group ${activeTab === cat.id
+                        ? 'bg-slate-900 text-white shadow-lg scale-100'
+                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                       }`}
                   >
-                    <span>{cat.icon}</span>
-                    <span className="uppercase tracking-tighter">{cat.label}</span>
+                    <span className={`text-2xl transition-transform duration-300 ${activeTab === cat.id ? 'scale-110' : 'grayscale group-hover:grayscale-0'}`}>{cat.icon}</span>
+                    <span className="uppercase tracking-wide">{cat.label}</span>
                   </button>
                 ))}
               </div>
@@ -244,140 +255,177 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Cards Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 -mt-12 relative z-20 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Main Grid Content */}
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 pb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {ACADEMY_DATA.filter(item => item.category === activeTab).map((item) => (
-            <button
+            <div
               key={item.id}
               onClick={() => setSelectedInfo(item)}
-              className="group text-left bg-white p-8 rounded-[2.5rem] border-2 border-transparent hover:border-orange-500/20 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+              className="group cursor-pointer bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 group-hover:bg-orange-50 rounded-bl-[4rem] -mr-10 -mt-10 transition-colors"></div>
+              {/* Card Decor */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-slate-50 to-orange-50/50 rounded-bl-[100px] transition-all group-hover:scale-110"></div>
 
               <div className="relative z-10">
-                <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform">{item.icon}</div>
-                <h3 className="text-2xl font-black text-slate-900 mb-3 leading-tight tracking-tight">
+                <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300 shadow-sm group-hover:shadow-orange-500/30">
+                  {item.icon}
+                </div>
+
+                <h3 className="text-2xl font-black text-slate-900 mb-4 leading-tight group-hover:text-orange-600 transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-slate-500 text-sm font-bold leading-relaxed mb-6">
+
+                <p className="text-slate-500 font-medium leading-relaxed mb-8">
                   {item.short}
                 </p>
-                <div className="flex items-center gap-2 text-orange-600 font-black text-[10px] uppercase tracking-widest group-hover:gap-4 transition-all">
-                  Detayları Gör
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+
+                <div className="flex items-center gap-3 text-slate-900 font-bold text-xs uppercase tracking-widest group-hover:text-orange-600 transition-colors">
+                  <span className="w-8 h-[2px] bg-slate-200 group-hover:w-16 group-hover:bg-orange-500 transition-all"></span>
+                  İncele
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
 
-        {/* Glossary Quick View */}
-        <div className="mt-20">
-          <h3 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-widest border-l-4 border-orange-500 pl-4">Hızlı Terimler Sözlüğü</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {GLOSSARY_TERMS.map((gt, i) => (
-              <div key={i} className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-                <span className="block text-orange-600 font-black text-xs uppercase mb-1">{gt.term}</span>
-                <span className="text-slate-500 text-[10px] font-bold leading-tight">{gt.def}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Bottom Section: Quote & Glossary */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-16">
 
-        {/* Advisory Motivation Card */}
-        <div className="mt-16 p-10 bg-slate-900 rounded-[3rem] shadow-2xl flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-          <div className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center text-3xl shrink-0 animate-pulse">💡</div>
-          <div className="relative z-10">
-            <h4 className="text-xl font-black text-white mb-1 tracking-tight">Baba, Başarının Sırrı Şurada:</h4>
-            <p className="text-slate-400 font-medium leading-relaxed">
-              "Bilgi, güveni; güven ise satışı getirir. Bu sayfadaki her kart senin masadaki otoriteni artıracak bir silahtır.
-              Müşteriye teknik terimleri değil, onların hayatındaki karşılığını anlat."
-            </p>
+          {/* Motivation Quote */}
+          <div className="xl:col-span-1 bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden flex flex-col justify-center min-h-[400px]">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/20 rounded-full blur-[80px] -mr-20 -mt-20"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full blur-[60px] -ml-10 -mb-10"></div>
+
+            <div className="relative z-10">
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-3xl mb-8 border border-white/10">
+                💡
+              </div>
+              <h4 className="text-lg font-bold text-orange-400 uppercase tracking-widest mb-4">Başarının Sırrı</h4>
+              <p className="text-2xl font-medium leading-normal opacity-90 italic font-serif">
+                "Bilgi, güveni; güven ise satışı getirir. Bu sayfadaki her kart senin masadaki otoriteni artıracak bir silahtır."
+              </p>
+              <div className="mt-8 flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-xs font-bold shadow-lg shadow-orange-500/40">FD</div>
+                <span className="text-sm font-bold text-slate-400">Finansal Danışman</span>
+              </div>
+            </div>
           </div>
+
+          {/* Glossary */}
+          <div className="xl:col-span-2 bg-gradient-to-br from-white to-slate-50 rounded-[3rem] p-10 border border-slate-100 shadow-xl shadow-slate-200/50">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="p-3 bg-slate-900 text-white rounded-xl">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900">Hızlı Terimler Sözlüğü</h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {GLOSSARY_TERMS.map((gt, i) => (
+                <div key={i} className="group p-5 rounded-2xl bg-white border border-slate-100 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-500/5 transition-all duration-300">
+                  <span className="block text-orange-600 font-black text-sm uppercase tracking-wider mb-2 group-hover:translate-x-1 transition-transform">{gt.term}</span>
+                  <span className="text-slate-500 text-xs font-bold leading-relaxed">{gt.def}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* Detail Modal - Fixed Center Layout */}
-      {selectedInfo && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-md animate-fadeIn">
-          {/* Backdrop Click-to-Close */}
-          <div className="absolute inset-0" onClick={() => setSelectedInfo(null)}></div>
+      {/* PORTAL MODAL FIX */}
+      {selectedInfo && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
+          {/* Backdrop with Blur */}
+          <div
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-xl transition-opacity animate-fadeIn"
+            onClick={() => setSelectedInfo(null)}
+          ></div>
 
-          <div className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative overflow-hidden animate-cardIn z-10 flex flex-col max-h-[90vh]">
+          {/* Modal Content */}
+          <div className="bg-white w-full max-w-3xl rounded-[3rem] shadow-2xl relative overflow-hidden animate-cardIn z-10 flex flex-col max-h-[85vh] border border-white/20">
+
             {/* Modal Header */}
-            <div className="bg-slate-900 shrink-0 h-28 sm:h-24 flex items-center px-6 sm:px-12 relative">
+            <div className="bg-slate-900 shrink-0 h-32 flex items-center px-8 relative overflow-hidden">
+              {/* Decor */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/20 rounded-full blur-[60px] -mr-16 -mt-32"></div>
+
+              <div className="relative z-10 flex items-center w-full gap-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg ring-4 ring-white/10 shrink-0">
+                  {selectedInfo.icon}
+                </div>
+                <div>
+                  <span className="block text-orange-400 font-bold text-[10px] uppercase tracking-[0.2em] mb-1 opacity-80">{selectedInfo.category} DOSYASI</span>
+                  <h2 className="text-2xl sm:text-3xl font-black text-white leading-none tracking-tight">{selectedInfo.title}</h2>
+                </div>
+              </div>
+
               <button
                 onClick={() => setSelectedInfo(null)}
-                className="absolute top-4 right-6 text-white/50 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                className="absolute top-6 right-6 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all backdrop-blur-md"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
-              <div className="absolute -bottom-6 left-6 sm:left-12 w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-2xl sm:rounded-3xl shadow-xl flex items-center justify-center text-3xl sm:text-4xl border border-slate-100">
-                {selectedInfo.icon}
-              </div>
-              <div className="ml-20 sm:ml-24 text-white">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500 opacity-80">{selectedInfo.category} DOSYASI</span>
-                <h2 className="text-lg sm:text-2xl font-black mt-1 tracking-tight leading-tight">{selectedInfo.title}</h2>
-              </div>
             </div>
 
             {/* Scrollable Content */}
-            <div className="p-6 sm:p-12 pt-10 sm:pt-16 overflow-y-auto no-scrollbar flex-1">
-              <div className="space-y-6 sm:space-y-8">
+            <div className="p-8 sm:p-10 overflow-y-auto no-scrollbar flex-1 bg-white">
+              <div className="space-y-6">
                 {selectedInfo.details.map((detail, idx) => (
-                  <div key={idx} className="flex gap-4 sm:gap-6 animate-fadeIn" style={{ animationDelay: `${idx * 0.1}s` }}>
-                    <div className="w-8 h-8 rounded-xl bg-orange-50 flex items-center justify-center shrink-0 font-black text-orange-500 text-xs shadow-inner">
+                  <div key={idx} className="flex gap-5 group">
+                    <span className="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 font-black text-xs shrink-0 group-hover:bg-orange-500 group-hover:text-white group-hover:border-orange-500 transition-all duration-300">
                       {idx + 1}
-                    </div>
-                    <p className="text-slate-600 text-base sm:text-lg font-semibold leading-snug">
+                    </span>
+                    <p className="text-slate-600 text-lg font-medium leading-relaxed pt-0.5">
                       {detail}
                     </p>
                   </div>
                 ))}
               </div>
 
-              {/* Special Advisor Note */}
-              <div className="mt-8 sm:mt-12 p-6 sm:p-8 bg-slate-50 rounded-[2rem] border border-slate-100 flex items-start gap-4 sm:gap-6">
-                <div className="text-3xl sm:text-4xl shrink-0">👨‍🏫</div>
-                <div>
-                  <h5 className="text-slate-400 font-black uppercase text-[10px] tracking-widest mb-1">Danışman Taktiği</h5>
-                  <p className="text-slate-700 text-sm font-bold italic leading-relaxed">
+              {/* Pro Tip Box */}
+              <div className="mt-10 p-8 bg-slate-50 rounded-[2rem] border border-slate-100 flex gap-6 relative overflow-hidden group hover:border-orange-200 transition-colors">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-100/50 rounded-full blur-[40px] -mr-10 -mt-10 transition-colors group-hover:bg-orange-200/50"></div>
+                <div className="text-4xl shrink-0 grayscale group-hover:grayscale-0 transition-all duration-500">👨‍🏫</div>
+                <div className="relative z-10">
+                  <h5 className="text-orange-600 font-black uppercase text-[10px] tracking-widest mb-2">Danışman Tavsiyesi</h5>
+                  <p className="text-slate-800 text-lg font-bold italic leading-relaxed font-serif">
                     "{selectedInfo.proTip}"
                   </p>
                 </div>
               </div>
 
-              <button
-                onClick={() => setSelectedInfo(null)}
-                className="w-full mt-8 py-4 sm:py-5 bg-slate-900 text-white font-black rounded-2xl sm:rounded-3xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/20 active:scale-[0.98] uppercase tracking-widest text-[10px] sm:text-xs"
-              >
-                Bilgiyi Cebime Koydum
-              </button>
+              <div className="mt-8 text-center">
+                <button
+                  onClick={() => setSelectedInfo(null)}
+                  className="px-12 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95"
+                >
+                  Tamam, Anlaşıldı 👍
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
-      {/* Animations */}
+      {/* Animation Styles */}
       <style>{`
         @keyframes cardIn {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
+          from { opacity: 0; transform: scale(0.9) translateY(20px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
         }
         .animate-cardIn {
-          animation: cardIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+          animation: cardIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
         .animate-fadeIn {
-          animation: fadeIn 0.2s ease-out forwards;
+          animation: fadeIn 0.3s ease-out forwards;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
     </div>
   );
