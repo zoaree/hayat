@@ -108,26 +108,30 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         </div>
       )}
 
-      {/* Modern Tabs - Scrollable on mobile */}
-      <div className="overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0 mb-6 sm:mb-10 text-nowrap snap-x snap-mandatory no-scrollbar">
-        <div className="flex gap-2 sm:gap-1 p-1.5 sm:p-1 bg-slate-200/50 rounded-2xl w-max mx-auto sm:w-fit sm:mx-0">
-          {[
-            { id: 'overview', label: 'Genel Bakış' },
-            { id: 'coverage', label: 'Teminatlar' },
-            { id: 'lifecycle', label: 'Teknik İşleyiş (Eğitim)' },
-            { id: 'faq', label: 'Müşteri Soruları (SSS)' }
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${activeTab === tab.id
-                ? 'bg-white text-orange-600 shadow-md scale-105'
-                : 'text-slate-500 hover:text-slate-700'
-                }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+      {/* Modern Tabs - Grid for Mobile (Full Visibility) */}
+      <div className="sticky top-16 z-20 -mx-4 sm:mx-0 mb-6 sm:mb-10 bg-slate-50/95 backdrop-blur-sm sm:bg-transparent py-3 sm:py-0 border-b sm:border-0 border-slate-200/50 transition-all shadow-sm sm:shadow-none">
+        <div className="px-4 sm:px-0">
+          <div className="bg-slate-200/50 p-1.5 rounded-2xl mx-auto sm:w-fit">
+            <div className="grid grid-cols-2 sm:flex sm:items-center gap-2">
+              {[
+                { id: 'overview', label: 'Genel Bakış' },
+                { id: 'coverage', label: 'Teminatlar' },
+                { id: 'lifecycle', label: 'Teknik İşleyiş' },
+                { id: 'faq', label: 'S.S.S.' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`px-2 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all sm:whitespace-nowrap ${activeTab === tab.id
+                    ? 'bg-white text-orange-600 shadow-md scale-[1.02] sm:scale-105 ring-1 ring-black/5'
+                    : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200/50'
+                    }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -186,25 +190,26 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         )}
 
         {activeTab === 'coverage' && (
-          <div className="space-y-10">
+          <div className="space-y-12">
+            {/* Main Coverages Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {product.coverages.map((c, i) => (
-                <div key={i} className={`group relative p-8 rounded-3xl border transition-all hover:shadow-xl ${c.isMain ? 'bg-white border-orange-500 ring-2 ring-orange-500/10' : 'bg-white border-slate-200'}`}>
-                  <div className="flex justify-between items-start mb-4">
-                    <h5 className={`font-black text-xl ${c.isMain ? 'text-orange-600' : 'text-slate-900'}`}>{c.title}</h5>
-                    {c.isMain && <span className="bg-orange-500 text-white text-[10px] px-3 py-1 rounded-full uppercase font-black">ANA</span>}
+                <div key={i} className={`group relative p-8 rounded-[2rem] transition-all duration-300 ${c.isMain ? 'bg-gradient-to-b from-orange-500 to-orange-600 text-white shadow-xl shadow-orange-500/20 transform hover:-translate-y-1' : 'bg-white border border-slate-100 hover:border-orange-200 shadow-sm hover:shadow-lg'}`}>
+                  <div className="flex justify-between items-start mb-6">
+                    <h5 className={`font-black text-2xl leading-none tracking-tight ${c.isMain ? 'text-white' : 'text-slate-900'}`}>{c.title}</h5>
+                    {c.isMain && <span className="bg-white/20 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full uppercase font-black tracking-widest">ANA TEMİNAT</span>}
                   </div>
-                  <p className="text-slate-500 text-sm mb-6 leading-relaxed min-h-[60px]">{c.description}</p>
+                  <p className={`text-sm mb-8 leading-relaxed font-medium ${c.isMain ? 'text-orange-50' : 'text-slate-500'}`}>{c.description}</p>
 
-                  <div className="space-y-3 border-t border-slate-100 pt-6">
+                  <div className={`space-y-4 pt-6 mt-auto ${c.isMain ? 'border-t border-white/20' : 'border-t border-slate-50'}`}>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-400 font-bold uppercase tracking-widest">Limit</span>
-                      <span className="text-slate-900 font-black">{c.limits}</span>
+                      <span className={`font-bold uppercase tracking-widest ${c.isMain ? 'text-orange-100' : 'text-slate-400'}`}>Limit</span>
+                      <span className={`font-black text-lg ${c.isMain ? 'text-white' : 'text-slate-900'}`}>{c.limits}</span>
                     </div>
                     {c.impactOnPolicy && (
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-400 font-bold uppercase tracking-widest">Poliçe Sonucu</span>
-                        <span className="text-red-600 font-black">{c.impactOnPolicy}</span>
+                        <span className={`font-bold uppercase tracking-widest ${c.isMain ? 'text-orange-100' : 'text-slate-400'}`}>Sonuç</span>
+                        <span className={`font-black uppercase ${c.isMain ? 'text-white' : 'text-red-500'}`}>{c.impactOnPolicy}</span>
                       </div>
                     )}
                   </div>
@@ -212,51 +217,89 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
               ))}
             </div>
 
-            {/* Wait Periods as timeline */}
-            <div className="bg-slate-50 p-10 rounded-[3rem] border border-slate-100">
-              <h4 className="text-2xl font-black mb-8 flex items-center gap-2">
-                <span className="p-2 bg-slate-900 text-white rounded-lg text-sm">📅</span>
-                Önemli Süreler ve Beklemeler
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Waiting Periods - Clean Grid Layout */}
+            <div className="bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
+              <div className="flex items-center gap-3 mb-8">
+                <span className="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-xl shadow-sm">⏳</span>
+                <div>
+                  <h4 className="text-xl font-black text-slate-900">Önemli Süreler ve Beklemeler</h4>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">Poliçenin Geçerlilik Şartları</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {product.waitingPeriods.map((wp, i) => (
-                  <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <span className="block text-slate-400 font-black text-[10px] uppercase tracking-widest mb-1">{wp.title}</span>
-                    <span className="text-slate-900 font-black text-lg">{wp.period}</span>
+                  <div key={i} className="flex flex-col justify-between p-6 rounded-[2rem] bg-slate-50 border border-slate-100 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-500/5 transition-all group">
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className={`w-2 h-2 rounded-full ${wp.title.includes('MS') ? 'bg-purple-500' : wp.title.includes('Hayatta') ? 'bg-red-500' : wp.title.includes('Maluliyet') ? 'bg-blue-500' : 'bg-orange-500'}`}></div>
+                        <span className="text-[10px] uppercase font-black tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">{wp.title}</span>
+                      </div>
+                      <h5 className="text-2xl font-black text-slate-800 mb-2 group-hover:text-orange-600 transition-colors">{wp.period}</h5>
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-slate-200/50">
+                      <p className="text-xs font-medium text-slate-500 leading-relaxed">
+                        {wp.title.includes('Muafiyet') ? 'Hastalık başlangıcı bu süreden sonra olmalı.' :
+                          wp.title.includes('Hayatta') ? 'Teşhis veya ameliyat sonrası yaşam şartı.' :
+                            wp.title.includes('Maluliyet') ? 'Durumun kalıcı olduğunun kesinleşmesi.' :
+                              'Poliçe başlangıcından itibaren geçen süre.'}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Detaylı Kritik Hastalıklar Render */}
+            {/* Critical Illnesses Grid - Dark Theme (Slate Match) */}
             {product.detailedIllnesses && (
-              <div className="bg-slate-900 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden">
-                <div className="flex flex-col mb-10 relative z-10">
-                  <h4 className="text-3xl font-black flex items-center gap-3">
-                    🧬 17 Kritik Hastalık Rehberi
-                  </h4>
-                  <p className="text-slate-400 mt-2 font-medium">
-                    <span className="bg-orange-500 text-white px-2 py-0.5 rounded mr-2 uppercase text-[10px] font-black">Önemli:</span>
-                    Detayları ve istisnaları öğrenmek için hastalığa tıklayın.
-                  </p>
-                </div>
+              <div className="bg-slate-900 p-8 sm:p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                {/* Background Decor - Blue/Slate Mix */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-                  {product.detailedIllnesses.map((ill, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSelectedIllness(ill)}
-                      className="flex items-center gap-4 bg-slate-800/50 p-4 rounded-2xl border border-slate-700 hover:border-orange-500 hover:bg-slate-800 transition-all text-left"
-                    >
-                      <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-700 text-slate-400 group-hover:bg-orange-500 font-bold text-xs shrink-0">
-                        {i + 1}
+                <div className="relative z-10 space-y-8">
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-8">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-blue-500/30">🧬</div>
+                      <div>
+                        <h4 className="text-3xl font-black text-white">17 Kritik Hastalık Rehberi</h4>
+                        <p className="text-slate-400 text-sm font-medium mt-1">Detayları görmek için kartlara tıklayın.</p>
                       </div>
-                      <span className="text-sm font-bold tracking-tight">{ill.name.replace(/^\d+\.\s*/, '')}</span>
-                    </button>
-                  ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {product.detailedIllnesses.map((ill, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedIllness(ill)}
+                        className="group relative h-32 text-left p-6 bg-white/5 border border-white/5 rounded-[2rem] hover:bg-white/10 hover:shadow-xl transition-all duration-300 overflow-hidden backdrop-blur-sm"
+                      >
+                        {/* Watermark Number */}
+                        <span className="absolute -bottom-4 -right-2 text-[6rem] font-black text-white/5 group-hover:text-white/10 transition-colors select-none z-0 tracking-tighter leading-none">
+                          {(i + 1).toString().padStart(2, '0')}
+                        </span>
+
+                        {/* Context */}
+                        <div className="relative z-10 h-full flex flex-col justify-between">
+                          <div className="flex justify-between items-start">
+                            <span className="font-bold text-slate-200 text-sm leading-tight max-w-[85%] group-hover:text-white transition-colors">
+                              {ill.name.replace(/^\d+\.\s*/, '')}
+                            </span>
+                            <span className="w-7 h-7 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all shadow-inner border border-blue-500/10">
+                              <svg className="w-3.5 h-3.5 transform group-hover:rotate-45 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 12h14M12 5l7 7-7 7" /></svg>
+                            </span>
+                          </div>
+                          <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-amber-400 transition-colors opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 duration-300">
+                            İNCELE
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Illness Detail Modal/Panel - PORTAL UPDATE */}
+                {/* Illness Detail Modal/Panel - PORTAL */}
                 {selectedIllness && createPortal(
                   <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
                     {/* Backdrop */}
@@ -342,28 +385,34 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
               </div>
             )}
 
-            {/* Maluliyet Kriterleri Render */}
+            {/* Disability Criteria */}
             {product.disabilityCriteria && (
-              <div className="bg-blue-900 p-10 rounded-[3rem] text-white shadow-2xl">
-                <div className="flex flex-col mb-10">
-                  <h4 className="text-3xl font-black flex items-center gap-3">
-                    ♿ İş Göremezlik (Maluliyet) Kriterleri
-                  </h4>
-                  <p className="text-blue-200 mt-2 font-medium">
-                    <span className="bg-orange-500 text-white px-2 py-0.5 rounded mr-1">EĞİTİM NOTU:</span>
-                    Tazminat için 6 Günlük Yaşam Faaliyetinden <strong>en az 3'ünün</strong> yapılamıyor olması gerekir.
-                  </p>
-                </div>
+              <div className="bg-slate-900 rounded-[2.5rem] p-8 sm:p-12 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                  {product.disabilityCriteria.map((crit, i) => (
-                    <div key={i} className="group flex items-center gap-4 bg-blue-800/50 p-5 rounded-2xl border border-blue-700 hover:border-orange-500 transition-all cursor-default shadow-lg">
-                      <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-blue-700 text-blue-200 group-hover:bg-orange-500 group-hover:text-white font-black transition-all shrink-0">
-                        {i + 1}
+                <div className="relative z-10">
+                  <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 border-b border-white/10 pb-8">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="p-2 bg-blue-600 rounded-lg">♿</span>
+                        <h4 className="text-2xl font-black">İş Göremezlik (Maluliyet)</h4>
                       </div>
-                      <span className="font-bold tracking-tight leading-tight">{crit}</span>
+                      <p className="text-slate-400 text-sm max-w-lg">Tazminat hakkı kazanmak için aşağıdaki aktivitelerden en az 3 tanesinin <strong className="text-white">yapılamıyor</strong> olması gerekir.</p>
                     </div>
-                  ))}
+                    <div className="text-right">
+                      <span className="block text-4xl font-black text-blue-400">3/6</span>
+                      <span className="text-[10px] uppercase font-bold tracking-widest opacity-60">Kriter Şartı</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {product.disabilityCriteria.map((crit, i) => (
+                      <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-xs shrink-0">{i + 1}</div>
+                        <span className="font-bold text-sm text-slate-200">{crit}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -371,114 +420,104 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         )}
 
         {activeTab === 'lifecycle' && (
-          <div className="space-y-8">
-            {/* Educational Header */}
-            <div className="bg-orange-50 border-2 border-orange-200 p-6 rounded-2xl flex items-start gap-4">
-              <div className="text-3xl">💡</div>
+          <div className="space-y-10">
+            {/* Educational Alert */}
+            <div className="bg-gradient-to-r from-orange-50 to-white border border-orange-100 p-8 rounded-[2rem] flex flex-col md:flex-row items-start gap-6 shadow-sm">
+              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-2xl shrink-0">💡</div>
               <div>
-                <h4 className="font-black text-orange-900 mb-1">Eğitim Notu: Matematiksel Karşılık Nedir?</h4>
-                <p className="text-orange-800 text-sm leading-relaxed">
-                  İade tutarları (iştirak bedeli), müşterinin ödediği toplam primden değil; sigorta şirketinin yaptığı masraflar ve o ana kadarki risk maliyetleri düşüldükten sonra kalan <strong>"Matematiksel Karşılık"</strong> üzerinden hesaplanır.
+                <h4 className="font-black text-slate-900 border-b border-orange-200 pb-2 mb-2 inline-block">Matematiksel Karşılık Nedir?</h4>
+                <p className="text-slate-600 font-medium leading-relaxed">
+                  İade tutarları, ödenen toplam primden değil; sigorta şirketinin risk ve işletme masrafları düşüldükten sonra kalan <strong className="text-orange-600">"Matematiksel Karşılık"</strong> üzerinden hesaplanır.
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Tenzil Card */}
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 group">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 bg-blue-100 text-blue-600 rounded-2xl">🛡️</div>
-                    <h4 className="text-xl font-black text-slate-900">Tenzil</h4>
-                  </div>
-                  <span className="text-[10px] bg-slate-100 px-2 py-1 rounded font-bold text-slate-500">DONDURMA</span>
-                </div>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">{product.lifecycle.tenzil}</p>
-                <div className="space-y-2">
-                  <div className="bg-blue-50 p-3 rounded-xl text-[11px] text-blue-700">
-                    <span className="font-bold block mb-1">Basitçe:</span>
-                    "Prim ödemeyi bırakıyorum ama korumam (indirgenerek) devam etsin."
-                  </div>
-                  <p className="text-[10px] text-slate-400 font-bold">* Hak kazanmak için en az 12 ay ödeme şart.</p>
+            {/* Lifecycle Stages Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Tenzil */}
+              <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-6">🛡️</div>
+                <h4 className="text-xl font-black text-slate-900 mb-2">Tenzil (Dondurma)</h4>
+                <p className="text-sm text-slate-500 font-medium mb-6 min-h-[40px]">{product.lifecycle.tenzil}</p>
+                <div className="bg-slate-50 rounded-xl p-4">
+                  <span className="block text-[10px] uppercase font-black text-slate-400 tracking-widest mb-1">Özetle</span>
+                  <p className="text-xs font-bold text-slate-700">"Primi durdur, düşük teminatla devam et."</p>
                 </div>
               </div>
 
-              {/* Istirak Card */}
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 bg-orange-100 text-orange-600 rounded-2xl">💸</div>
-                    <h4 className="text-xl font-black text-slate-900">İştirak</h4>
-                  </div>
-                  <span className="text-[10px] bg-slate-100 px-2 py-1 rounded font-bold text-slate-500">BOZMA</span>
-                </div>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">{product.lifecycle.istirak}</p>
+              {/* İstirak */}
+              <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl mb-6">💸</div>
+                <h4 className="text-xl font-black text-slate-900 mb-2">İştirak (Bozma)</h4>
+                <p className="text-sm text-slate-500 font-medium mb-6 min-h-[40px]">{product.lifecycle.istirak}</p>
 
                 {product.lifecycle.istirakTable && (
-                  <div className="space-y-1.5 mb-4">
+                  <div className="space-y-1 mb-4">
                     {product.lifecycle.istirakTable.map((row, i) => (
-                      <div key={i} className={`flex justify-between p-2 rounded-lg text-xs ${i === 0 ? 'bg-red-50 text-red-700 font-bold' : 'bg-slate-50 text-slate-600'}`}>
-                        <span>{row.label}</span>
-                        <span>{row.rate}</span>
+                      <div key={i} className="flex justify-between text-[10px] font-bold p-1 border-b border-slate-50 last:border-0">
+                        <span className="text-slate-500">{row.label}</span>
+                        <span className="text-slate-900">{row.rate}</span>
                       </div>
                     ))}
                   </div>
                 )}
-                <p className="text-[10px] text-slate-400 italic leading-tight">
-                  * İlk 12 ay iade sıfırdır. İştirak bedeli matematiksel karşılık x (1-kesinti oranı) şeklinde hesaplanır.
-                </p>
-                {product.premiumBreakdown && (
-                  <div className="mt-4 p-3 bg-green-50 rounded-xl border border-green-100 text-[10px] text-green-700 font-bold uppercase tracking-tight">
-                    🎁 60. Ay sonu ayrılırsa ÖDÜL'ün %75'i de ödenir!
-                  </div>
-                )}
+                <div className="bg-orange-50 rounded-xl p-4">
+                  <span className="block text-[10px] uppercase font-black text-orange-400 tracking-widest mb-1">Dikkat</span>
+                  <p className="text-xs font-bold text-orange-800">Erken çıkışlarda kesinti uygulanır.</p>
+                </div>
               </div>
 
-              {/* Ikraz Card */}
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 bg-green-100 text-green-600 rounded-2xl">🏦</div>
-                    <h4 className="text-xl font-black text-slate-900">İkraz</h4>
-                  </div>
-                  <span className="text-[10px] bg-slate-100 px-2 py-1 rounded font-bold text-slate-500">BORÇ ALMA</span>
+              {/* İkraz */}
+              <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-6">🏦</div>
+                <h4 className="text-xl font-black text-slate-900 mb-2">İkraz (Borç)</h4>
+                <p className="text-sm text-slate-500 font-medium mb-6 min-h-[40px]">{product.lifecycle.ikraz || "Bu ürün için tanımlı değildir."}</p>
+                <div className="bg-slate-50 rounded-xl p-4">
+                  <span className="block text-[10px] uppercase font-black text-slate-400 tracking-widest mb-1">Avantaj</span>
+                  <p className="text-xs font-bold text-slate-700">Poliçeyi bozmadan nakit kullan.</p>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  {product.lifecycle.ikraz || "Bu ürün için borç alma özelliği belirtilmemiştir."}
-                </p>
-                {product.lifecycle.ikraz && (
-                  <div className="bg-green-50 p-4 rounded-xl text-[11px] text-green-700">
-                    <span className="font-bold block mb-1">Avantajı:</span>
-                    Poliçeyi bozmadan, hayat sigortası haklarınızı kaybetmeden acil nakit ihtiyacını karşılar.
-                  </div>
-                )}
               </div>
             </div>
 
-            {/* Bottom Rules */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-              <div className="bg-slate-900 p-8 rounded-3xl text-white">
-                <h4 className="text-xl font-black mb-4 flex items-center gap-2">
-                  <span className="p-2 bg-orange-500 rounded-lg text-sm">⏱️</span>
-                  Ara Verme Hakkı
-                </h4>
-                <p className="text-slate-400 text-sm leading-relaxed">{product.lifecycle.araVerme}</p>
-                <div className="mt-4 p-3 bg-white/5 rounded-xl border border-white/10 text-xs text-orange-200">
-                  <strong>Not:</strong> Ara verme süresi poliçe vadesine eklenerek bitiş tarihini öteler.
+            {/* Bottom Rules Section - Redesigned */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Ara Verme Hakkı */}
+              <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full -mr-10 -mt-10"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="p-2.5 bg-slate-900 text-white rounded-xl shadow-lg shadow-slate-900/20">⏱️</span>
+                    <h4 className="text-lg font-black text-slate-900">Ara Verme Hakkı</h4>
+                  </div>
+                  <p className="text-slate-600 font-medium leading-relaxed mb-6">{product.lifecycle.araVerme}</p>
+                  <div className="flex items-center gap-2 text-xs font-bold text-orange-600 bg-orange-50 p-3 rounded-xl w-fit">
+                    <span>⚠️</span>
+                    <span>Süre sonuna eklenir, vadeyi öteler.</span>
+                  </div>
                 </div>
               </div>
-              <div className="bg-red-50 p-8 rounded-3xl border border-red-100">
-                <h4 className="text-xl font-black mb-4 text-red-900 flex items-center gap-2">
-                  <span className="p-2 bg-red-500 text-white rounded-lg text-sm">🏁</span>
-                  Sözleşme Ne Zaman Biter?
-                </h4>
-                <p className="text-red-700 text-sm leading-relaxed">{product.lifecycle.sonlanma}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {product.exclusions.slice(0, 2).map((exc, i) => (
-                    <span key={i} className="text-[10px] bg-red-100 text-red-600 px-2 py-1 rounded-full font-bold uppercase">
-                      {exc.split(' ')[0]} RİSKİ ❌
+
+              {/* Sözleşme Bitişi */}
+              <div className="bg-white p-8 rounded-[2.5rem] border-2 border-red-100 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -mr-10 -mt-10"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="p-2.5 bg-red-500 text-white rounded-xl shadow-lg shadow-red-500/20">🏁</span>
+                    <h4 className="text-lg font-black text-slate-900">Sözleşme Bitişi</h4>
+                  </div>
+                  <p className="text-slate-600 font-medium leading-relaxed mb-6">{product.lifecycle.sonlanma}</p>
+
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1.5 bg-slate-100 text-slate-600 border border-slate-200 rounded-lg text-[10px] font-black uppercase tracking-wide">
+                      Vefat
                     </span>
-                  ))}
+                    <span className="px-3 py-1.5 bg-green-50 text-green-600 border border-green-100 rounded-lg text-[10px] font-black uppercase tracking-wide">
+                      Süre Sonu (Vade)
+                    </span>
+                    <span className="px-3 py-1.5 bg-orange-50 text-orange-600 border border-orange-100 rounded-lg text-[10px] font-black uppercase tracking-wide">
+                      İştira (Ayrılma)
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -509,7 +548,7 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
       <div className="mt-16 text-center border-t pt-10 border-slate-200">
         <p className="text-slate-400 text-sm">Bu bilgiler eğitim amaçlıdır. Poliçe düzenlenirken Genel Şartlar ve Özel Şartlar esastır.</p>
         <div className="mt-4 flex justify-center gap-6">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-tighter">ViennaLife Teknik Rehber v2.6</span>
+          <span className="text-xs font-bold text-slate-500 uppercase tracking-tighter">ViennaLife Teknik Rehber v2.6.2</span>
         </div>
       </div>
     </div>
