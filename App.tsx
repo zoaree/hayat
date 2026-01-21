@@ -6,6 +6,7 @@ import ProductView from './components/ProductView';
 import ProductComparison from './pages/ProductComparison';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import ProductRecommendation from './pages/ProductRecommendation';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { usePageTracking } from './hooks/usePageTracking';
 import { turuncuElmaData } from './data/turuncuElma';
@@ -90,6 +91,7 @@ const AppContent: React.FC = () => {
   const getPageTitle = () => {
     if (currentProductId === 'home') return 'Ana Sayfa';
     if (currentProductId === 'comparison') return 'Ürün Karşılaştırma';
+    if (currentProductId === 'recommendation') return 'Ürün Seçim Sihirbazı';
     const product = productMap[currentProductId];
     return product ? product.name : currentProductId.replace(/-/g, ' ');
   };
@@ -97,6 +99,7 @@ const AppContent: React.FC = () => {
   const renderContent = () => {
     if (currentProductId === 'home') return <Home />;
     if (currentProductId === 'comparison') return <ProductComparison />;
+    if (currentProductId === 'recommendation') return <ProductRecommendation onNavigate={setCurrentProductId} />;
     const product = productMap[currentProductId];
     if (product) return <ProductView product={product} />;
 

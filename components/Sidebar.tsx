@@ -12,6 +12,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentProduct, onSelectProduct, isOp
   const products = [
     { id: 'home', name: 'Akademi Ana Sayfa', icon: '🏠' },
     { id: 'comparison', name: 'Ürün Kıyaslama', icon: '⚖️' },
+    { id: 'recommendation', name: 'Ürün Seçim Sihirbazı', icon: '🪄' },
     { id: 'turuncu-elma', name: 'Turuncu Elma Hayat', icon: '🍎' },
     { id: 'rop-80-20', name: 'ROP 80+20 Hayat', icon: '💰' },
     { id: 'rop-80-20-ferdi-kaza', name: 'ROP 80+20 Ferdi Kazalı Hayat', icon: '🛡️' },
