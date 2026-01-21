@@ -13,24 +13,24 @@ export const guvencemMehmedimKarmaData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (12) ≤ 75. (Maksimum Giriş Yaşı: 63)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir. Teminat, ödenen primlerin o günkü kur karşılığına göre güncellenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir. Teminat, ödenen primlerin o günkü kur karşılığına göre güncellenir.',
+      isMain: true,
       limits: 'Aylık primin katı cinsinden (USD)',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80)', 
-      description: '12 yıl sonunda hayatta kalma durumunda ödenen brüt primlerin %80\'i iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80)',
+      description: '12 yıl sonunda hayatta kalma durumunda ödenen brüt primlerin %80\'i iade edilir.',
+      isMain: false,
       limits: 'Dolar bazında Brüt Primlerin %80\'i',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Teşvik + Ek Ödül (%20 + %2)', 
-      description: 'Tüm primlerin eksiksiz ödenmesiyle gelen Viennalife ve Mehmedim özel bonusları.', 
-      isMain: false, 
+    {
+      title: 'Teşvik + Ek Ödül (%20 + %2)',
+      description: 'Tüm primlerin eksiksiz ödenmesiyle gelen Viennalife ve Mehmedim özel bonusları.',
+      isMain: false,
       limits: 'Toplam %22 Ek İade',
       impactOnPolicy: 'Toplam iade %102\'ye ulaşır.'
     }
@@ -47,7 +47,7 @@ export const guvencemMehmedimKarmaData: ProductData = {
     'Yasa dışı eylemler ve tehlikeli sporlar'
   ],
   lifecycle: {
-    tenzil: '12 ay sonra dondurma hakkı. Karma özelliğinden dolayı tenzil sonrası vade sonu iadesi Dolar bazında korunur.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay sonra prim ödemeyi bırakıp devam edebilirsiniz. Karma özelliğinden dolayı tenzil sonrası vade sonu iadesi Dolar bazında korunur.',
     istirak: '12 ay sonra iştirak (bozma) hakkı. İlk yıl iade sıfırdır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

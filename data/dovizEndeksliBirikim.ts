@@ -19,24 +19,24 @@ export const dovizEndeksliBirikimData: ProductData = {
     management: 4.5
   },
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Yaşam kaybı durumunda o tarihteki vefat tazminatı, kâr paylı birikim ve ödül tutarı toplamı lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Yaşam kaybı durumunda o tarihteki vefat tazminatı, kâr paylı birikim ve ödül tutarı toplamı lehtarlara ödenir.',
+      isMain: true,
       limits: 'Risk primi kesintisine göre belirlenen tutar',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Kâr Paylı Birikim (%80)', 
-      description: 'Primlerin %80\'i yatırıma yönlendirilir ve yıllık %1 getiri garantisi ile Dolar bazlı fonlarda değerlenir.', 
-      isMain: false, 
+    {
+      title: 'Kâr Paylı Birikim (%80)',
+      description: 'Primlerin %80\'i yatırıma yönlendirilir ve yıllık %1 getiri garantisi ile Dolar bazlı fonlarda değerlenir.',
+      isMain: false,
       limits: 'Yatırıma yönlendirilen tutar + Kâr Payı',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Kâr Paylı Ödül (%15)', 
-      description: 'Primlerin %15\'i ödül fonunda nemalanır. 5. yıldan (60 ay) itibaren kademeli hak ediş (%75) başlar.', 
-      isMain: false, 
+    {
+      title: 'Kâr Paylı Ödül (%15)',
+      description: 'Primlerin %15\'i ödül fonunda nemalanır. 5. yıldan (60 ay) itibaren kademeli hak ediş (%75) başlar.',
+      isMain: false,
       limits: 'Ödül fonu birikimi',
       impactOnPolicy: 'Vade sonunda veya 5. yıldan sonra iştirakle ödenir.'
     }
@@ -53,7 +53,7 @@ export const dovizEndeksliBirikimData: ProductData = {
     'Yasa dışı eylemler ve tehlikeli sporlar'
   ],
   lifecycle: {
-    tenzil: '12 ay ödemeden sonra poliçe dondurulabilir. Prim ödeme yükümlülüğü biter, mevcut birikim kâr payı almaya devam eder.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay prim ödedikten sonra ödemeyi bırakıp, poliçeyi daha düşük (tenzil edilmiş) teminatlarla vade sonuna kadar devam ettirebilirsiniz.',
     istirak: '12 ay sonra iştirak hakkı başlar. 5. yıldan (60 ay) sonra ayrılmak isterseniz ödül birikiminizin %75\'ini de alabilirsiniz.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti (İade Yok)' },

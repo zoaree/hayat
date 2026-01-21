@@ -13,24 +13,24 @@ export const rop8020KarmaFerdiKazaData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre ≤ 75. (Örn: 15 yıllık poliçe için max giriş 60)',
   coverages: [
-    { 
-      title: 'Hastalık Sonucu Vefat', 
-      description: 'Herhangi bir hastalık sonucu yaşam kaybında poliçe bedeli ödenir.', 
-      isMain: true, 
+    {
+      title: 'Hastalık Sonucu Vefat',
+      description: 'Herhangi bir hastalık sonucu yaşam kaybında poliçe bedeli ödenir.',
+      isMain: true,
       limits: 'Aylık primin 125-2.850 katı arası',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Kaza Sonucu Vefat (2X)', 
-      description: 'Kaza sonucu yaşam kaybında vefat teminatının tam 2 KATI ödenir.', 
-      isMain: true, 
+    {
+      title: 'Kaza Sonucu Vefat (2X)',
+      description: 'Kaza sonucu yaşam kaybında vefat teminatının tam 2 KATI ödenir.',
+      isMain: true,
       limits: 'Vefat Teminatının 2 Katı',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80 + %20)', 
-      description: 'Risk gerçekleşmezse Dolar bazındaki primlerin %100\'ü iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80 + %20)',
+      description: 'Risk gerçekleşmezse Dolar bazındaki primlerin %100\'ü iade edilir.',
+      isMain: false,
       limits: 'Ödenen toplam brüt primlerin %100\'ü',
       impactOnPolicy: 'Vade sonunda ödenir.'
     }

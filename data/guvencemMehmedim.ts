@@ -13,24 +13,24 @@ export const guvencemMehmedimData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (12) ≤ 75. (Maksimum Giriş Yaşı: 63)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu yaşam kaybında lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu yaşam kaybında lehtarlara ödenir.',
+      isMain: true,
       limits: 'Aylık primin katı cinsinden (Min 10.000 USD)',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80)', 
-      description: '12 yıl sonunda hayatta kalma durumunda ödenen brüt primlerin %80\'i iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80)',
+      description: '12 yıl sonunda hayatta kalma durumunda ödenen brüt primlerin %80\'i iade edilir.',
+      isMain: false,
       limits: 'Brüt Primlerin %80\'i',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Teşvik + Ek Ödül (%20 + %2)', 
-      description: 'Eksiksiz ödeme durumunda %20 Teşvik Ödülü ve Güvencem Mehmedim\'e özel %2 Ek Ödül verilir.', 
-      isMain: false, 
+    {
+      title: 'Teşvik + Ek Ödül (%20 + %2)',
+      description: 'Eksiksiz ödeme durumunda %20 Teşvik Ödülü ve Güvencem Mehmedim\'e özel %2 Ek Ödül verilir.',
+      isMain: false,
       limits: 'Toplam %22 Ek İade',
       impactOnPolicy: 'Toplam iade %102\'ye ulaşır.'
     }
@@ -46,7 +46,7 @@ export const guvencemMehmedimData: ProductData = {
     'Yasa dışı eylemler'
   ],
   lifecycle: {
-    tenzil: '12 ay sonra dondurulabilir. Tenzil durumunda iade %80 üzerinden oranlanarak yapılır.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay sonra prim ödemeyi bırakıp devam edebilirsiniz. Tenzil durumunda iade %80 üzerinden oranlanarak yapılır.',
     istirak: '12 ay sonra nakit iade alarak ayrılma hakkı. İlk yıl iade sıfırdır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

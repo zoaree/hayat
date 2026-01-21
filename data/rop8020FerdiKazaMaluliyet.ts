@@ -13,24 +13,24 @@ export const rop8020FerdiKazaMaluliyetData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre ≤ 75. (Maksimum giriş yaşı 63\'tür)',
   coverages: [
-    { 
-      title: 'Hastalık Sonucu Vefat', 
-      description: 'Hastalık sonucu yaşam kaybında poliçe bedeli ödenir.', 
-      isMain: true, 
+    {
+      title: 'Hastalık Sonucu Vefat',
+      description: 'Hastalık sonucu yaşam kaybında poliçe bedeli ödenir.',
+      isMain: true,
       limits: 'Min 10.000 USD',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Kaza Sonucu Vefat (2X)', 
-      description: 'Kaza sonucu yaşam kaybında vefat tazminatı tam İKİ KATINA çıkar.', 
-      isMain: true, 
+    {
+      title: 'Kaza Sonucu Vefat (2X)',
+      description: 'Kaza sonucu yaşam kaybında vefat tazminatı tam İKİ KATINA çıkar.',
+      isMain: true,
       limits: 'Vefat Teminatının 2 Katı',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Tam ve Daimi Maluliyet', 
-      description: 'Hastalık veya kaza sonucu 6 aylık bekleme süresi sonunda kesinleşen iş göremezlik durumu.', 
-      isMain: true, 
+    {
+      title: 'Tam ve Daimi Maluliyet',
+      description: 'Hastalık veya kaza sonucu 6 aylık bekleme süresi sonunda kesinleşen iş göremezlik durumu.',
+      isMain: true,
       limits: 'Poliçe Bedeli (Tamamı)',
       impactOnPolicy: 'Ödeme yapıldığında poliçe sonlanır.'
     }
@@ -55,7 +55,7 @@ export const rop8020FerdiKazaMaluliyetData: ProductData = {
     'Beyan edilmeyen kronik hastalıklar'
   ],
   lifecycle: {
-    tenzil: 'Poliçeyi "Dondurma". 12 ay ödedikten sonra ödemeyi bırakıp, indirgenmiş teminatlarla vadeyi bekleyebilirsiniz.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay ödedikten sonra ödemeyi bırakıp, indirgenmiş teminatlarla vadeyi bekleyebilirsiniz.',
     istirak: 'Poliçeyi "Bozma". İlk 12 ay iade yoktur. Sonrasında Matematiksel Karşılık üzerinden kademeli iade yapılır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

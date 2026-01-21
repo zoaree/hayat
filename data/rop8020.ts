@@ -13,24 +13,24 @@ export const rop8020Data: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre ≤ 75. (Örn: 15 yıllık poliçe için max giriş 60)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.',
+      isMain: true,
       limits: 'Aylık primin 133-3.500 katı arası (Min 10.000 USD)',
       impactOnPolicy: 'Ödeme yapıldığında poliçe sonlanır.'
     },
-    { 
-      title: 'Süre Sonu Hayatta Kalma', 
-      description: 'Poliçe sonunda risk gerçekleşmezse primlerin %80\'i iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu Hayatta Kalma',
+      description: 'Poliçe sonunda risk gerçekleşmezse primlerin %80\'i iade edilir.',
+      isMain: false,
       limits: 'Brüt Primlerin %80\'i',
       impactOnPolicy: 'Süre sonunda ödenir.'
     },
-    { 
-      title: 'Prim Ödeme Teşvik Ödülü', 
-      description: 'Tüm primlerin eksiksiz ödenmesi durumunda verilen ekstra ödüldür.', 
-      isMain: false, 
+    {
+      title: 'Prim Ödeme Teşvik Ödülü',
+      description: 'Tüm primlerin eksiksiz ödenmesi durumunda verilen ekstra ödüldür.',
+      isMain: false,
       limits: 'Brüt Primlerin %20\'si',
       impactOnPolicy: 'Süre sonu iadesine eklenir (%80+%20=%100 iade).'
     }
@@ -43,7 +43,7 @@ export const rop8020Data: ProductData = {
     'Tarifesiz uçaklarda/helikopterlerde görevli personel/pilot vefatı'
   ],
   lifecycle: {
-    tenzil: 'Poliçeyi "Dondurmak" demektir. 12 ay prim ödedikten sonra ödemeyi bırakıp, poliçeyi daha düşük teminatlarla vade sonuna kadar koruma altında tutabilirsiniz.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay prim ödedikten sonra ödemeyi bırakıp, poliçeyi daha düşük (tenzil edilmiş) teminatlarla vade sonuna kadar devam ettirebilirsiniz.',
     istirak: 'Poliçeyi "Bozmak/Kapatmak" demektir. İçerideki birikmiş parayı (Matematiksel Karşılık) alıp ayrılma hakkıdır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti (İade Yok)' },

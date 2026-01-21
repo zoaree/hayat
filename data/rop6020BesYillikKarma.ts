@@ -13,24 +13,24 @@ export const rop6020BesYillikKarmaData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (5) ≤ 75. (Maksimum Giriş Yaşı: 70)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir. Teminat her ay ödenen primin kur karşılığına göre güncellenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir. Teminat her ay ödenen primin kur karşılığına göre güncellenir.',
+      isMain: true,
       limits: 'Aylık primin 57-1.400 katı arası',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%60)', 
-      description: '5 yılın sonunda risk gerçekleşmezse Dolar bazındaki primlerin %60\'ı iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%60)',
+      description: '5 yılın sonunda risk gerçekleşmezse Dolar bazındaki primlerin %60\'ı iade edilir.',
+      isMain: false,
       limits: 'Ödenen Brüt Primlerin %60\'ı',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Teşvik Ödülü (%20 Bonus)', 
-      description: 'Tüm primlerin 5 yıl (60 ay) boyunca eksiksiz ödenmesiyle hak kazanılır.', 
-      isMain: false, 
+    {
+      title: 'Teşvik Ödülü (%20 Bonus)',
+      description: 'Tüm primlerin 5 yıl (60 ay) boyunca eksiksiz ödenmesiyle hak kazanılır.',
+      isMain: false,
       limits: 'Brüt Primlerin %20\'si',
       impactOnPolicy: 'Toplam iade %80\'e ulaşır.'
     }

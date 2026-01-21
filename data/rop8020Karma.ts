@@ -13,17 +13,17 @@ export const rop8020KarmaData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre ≤ 75. (Asgari giriş yaşı 18\'dir)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.',
+      isMain: true,
       limits: 'Aylık primin 133-3.500 katı arası (Min 10.000 USD)',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Karma Özellikli İade', 
-      description: 'Risk gerçekleşmezse ödenen primlerin %80\'i + %20 teşvik ödülü iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Karma Özellikli İade',
+      description: 'Risk gerçekleşmezse ödenen primlerin %80\'i + %20 teşvik ödülü iade edilir.',
+      isMain: false,
       limits: 'Ödenen toplam primlerin %100\'ü (Dolar bazında)',
       impactOnPolicy: 'Vade sonunda iade edilir.'
     }
@@ -36,7 +36,7 @@ export const rop8020KarmaData: ProductData = {
     'Yasa dışı eylemler ve tehlikeli sporlar'
   ],
   lifecycle: {
-    tenzil: 'Poliçeyi "Dondurma" hakkıdır. 12 ay ödemeden sonra prim ödemeyi bırakıp vadeyi bekleyebilirsiniz.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay ödemeden sonra prim ödemeyi bırakıp vadeyi bekleyebilirsiniz.',
     istirak: 'Poliçeyi "Bozma" hakkıdır. İlk 12 ay iade sıfırdır. Sonrasında matematiksel karşılık üzerinden tabloya göre iade yapılır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

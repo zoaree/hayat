@@ -13,24 +13,24 @@ export const rop8020FerdiKazaData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre ≤ 75. (Örn: 61 yaşındaki biri en fazla 12 yıllık alabilir)',
   coverages: [
-    { 
-      title: 'Hastalık Sonucu Vefat', 
-      description: 'Hastalık sonucu yaşam kaybında poliçe bedeli ödenir.', 
-      isMain: true, 
+    {
+      title: 'Hastalık Sonucu Vefat',
+      description: 'Hastalık sonucu yaşam kaybında poliçe bedeli ödenir.',
+      isMain: true,
       limits: 'Aylık primin 125-2.850 katı arası (Min 10.000 USD)',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Kaza Sonucu Vefat (2X)', 
-      description: 'Kaza sonucu yaşam kaybında vefat teminatının TAM İKİ KATI ödenir.', 
-      isMain: true, 
+    {
+      title: 'Kaza Sonucu Vefat (2X)',
+      description: 'Kaza sonucu yaşam kaybında vefat teminatının TAM İKİ KATI ödenir.',
+      isMain: true,
       limits: 'Vefat Teminatının 2 Katı',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80 + %20)', 
-      description: 'Risk gerçekleşmezse primlerin %80\'i + teşvik ödülüyle %100\'ü iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80 + %20)',
+      description: 'Risk gerçekleşmezse primlerin %80\'i + teşvik ödülüyle %100\'ü iade edilir.',
+      isMain: false,
       limits: 'Ödenen brüt primlerin %100\'ü',
       impactOnPolicy: 'Vade sonunda ödenir.'
     }
@@ -43,7 +43,7 @@ export const rop8020FerdiKazaData: ProductData = {
     'Deprem dışındaki doğal afetler (Sel, heyelan vb. Ferdi Kaza Şartlarına tabidir)'
   ],
   lifecycle: {
-    tenzil: 'Poliçeyi "Dondurmak" demektir. 12 ay ödedikten sonra ödemeyi bırakıp, poliçeyi (azalmış teminatlarla) vade sonuna kadar dondurabilirsiniz.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay ödedikten sonra ödemeyi bırakıp, poliçeyi (azalmış teminatlarla) vade sonuna kadar devam ettirebilirsiniz.',
     istirak: 'Poliçeyi "Bozmak/Kapatmak" demektir. İçerideki birikmiş nakit değeri alıp ayrılma hakkıdır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti (İade Yok)' },

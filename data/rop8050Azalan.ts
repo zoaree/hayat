@@ -13,24 +13,24 @@ export const rop8050AzalanData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (15) ≤ 75. (Maksimum Giriş Yaşı: 60)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı (Azalan)', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda o yılki azalan bedel ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı (Azalan)',
+      description: 'Hastalık veya kaza sonucu vefat durumunda o yılki azalan bedel ödenir.',
+      isMain: true,
       limits: 'Yıllık 1/15 Oranında Azalan',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80)', 
-      description: 'Risk gerçekleşmezse hayatta kalma teminatı olarak ödenir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80)',
+      description: 'Risk gerçekleşmezse hayatta kalma teminatı olarak ödenir.',
+      isMain: false,
       limits: 'Brüt Primlerin %80\'i',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Maksimum Bonus (%50 Teşvik)', 
-      description: 'Tüm primlerin 15 yıl boyunca eksiksiz ödenmesiyle hak kazanılır.', 
-      isMain: false, 
+    {
+      title: 'Maksimum Bonus (%50 Teşvik)',
+      description: 'Tüm primlerin 15 yıl boyunca eksiksiz ödenmesiyle hak kazanılır.',
+      isMain: false,
       limits: 'Brüt Primlerin %50\'si',
       impactOnPolicy: 'Toplam iade %130\'a ulaşır.'
     }
@@ -46,7 +46,7 @@ export const rop8050AzalanData: ProductData = {
     'Beyan edilmeyen kronik rahatsızlıklar'
   ],
   lifecycle: {
-    tenzil: '12 ay sonra dondurma hakkı. Tenzil durumunda vefat teminatı TTK 1502\'ye göre oranlanarak yeniden hesaplanır.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay sonra prim ödemeyi bırakıp devam edebilirsiniz. Tenzil durumunda vefat teminatı TTK 1502\'ye göre oranlanarak yeniden hesaplanır.',
     istirak: '12 ay sonra ayrılma hakkı. Erken ayrılmada %50 bonus tamamen yanar.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

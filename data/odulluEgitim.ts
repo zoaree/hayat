@@ -19,24 +19,24 @@ export const odulluEgitimData: ProductData = {
     management: 4.5
   },
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Yaşam kaybı durumunda vefat tazminatı, kâr paylı birikim ve teşvik ödülü toplamı lehtara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Yaşam kaybı durumunda vefat tazminatı, kâr paylı birikim ve teşvik ödülü toplamı lehtara ödenir.',
+      isMain: true,
       limits: 'Max 7 Milyon USD',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Kâr Paylı Birikim', 
-      description: 'Yatırıma yönlendirilen primler Dolar bazlı fonlarda değerlenir. Yıllık %1 getiri garantisi sunulur.', 
-      isMain: false, 
+    {
+      title: 'Kâr Paylı Birikim',
+      description: 'Yatırıma yönlendirilen primler Dolar bazlı fonlarda değerlenir. Yıllık %1 getiri garantisi sunulur.',
+      isMain: false,
       limits: 'Yatırılan Tutar + Kâr Payı',
       impactOnPolicy: 'Eğitim ödemesi veya vade sonu ödemesi olarak yapılır.'
     },
-    { 
-      title: 'Yıllık Eğitim Ödemeleri', 
-      description: '6. yılın sonundan itibaren okul taksitlerini karşılamak için yıllık nakit geri ödemeler başlar.', 
-      isMain: false, 
+    {
+      title: 'Yıllık Eğitim Ödemeleri',
+      description: '6. yılın sonundan itibaren okul taksitlerini karşılamak için yıllık nakit geri ödemeler başlar.',
+      isMain: false,
       limits: 'Birikim tutarına göre yıllık ödeme',
       impactOnPolicy: 'Poliçe devam eder.'
     }

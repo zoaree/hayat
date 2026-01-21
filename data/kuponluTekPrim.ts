@@ -13,24 +13,24 @@ export const kuponluTekPrimData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (10) ≤ 80. (Maksimum Giriş Yaşı: 70)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda poliçe süresi boyunca sabit kalan vefat bedeli lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda poliçe süresi boyunca sabit kalan vefat bedeli lehtarlara ödenir.',
+      isMain: true,
       limits: 'Yaşa ve prime göre belirlenen sabit tutar',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Ara Dönem Kupon Ödemeleri', 
-      description: 'Poliçenin 6. ayından itibaren her 6 ayda bir (toplam 20 adet) yapılan net nakit ödemelerdir.', 
-      isMain: false, 
+    {
+      title: 'Ara Dönem Kupon Ödemeleri',
+      description: 'Poliçenin 6. ayından itibaren her 6 ayda bir (toplam 20 adet) yapılan net nakit ödemelerdir.',
+      isMain: false,
       limits: 'Tek Primin %1.75\'i (Net)',
       impactOnPolicy: 'Hayatta kalma şartına bağlıdır.'
     },
-    { 
-      title: 'Süre Sonu Hayatta Kalma', 
-      description: '10 yıl sonunda risk gerçekleşmezse ana paranın %100\'ü iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu Hayatta Kalma',
+      description: '10 yıl sonunda risk gerçekleşmezse ana paranın %100\'ü iade edilir.',
+      isMain: false,
       limits: 'Tek Primin %100\'ü (USD)',
       impactOnPolicy: 'Vade sonunda ödenir.'
     }

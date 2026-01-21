@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import ProductView from './components/ProductView';
+import ProductComparison from './pages/ProductComparison';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
@@ -88,12 +89,14 @@ const AppContent: React.FC = () => {
 
   const getPageTitle = () => {
     if (currentProductId === 'home') return 'Ana Sayfa';
+    if (currentProductId === 'comparison') return 'Ürün Karşılaştırma';
     const product = productMap[currentProductId];
     return product ? product.name : currentProductId.replace(/-/g, ' ');
   };
 
   const renderContent = () => {
     if (currentProductId === 'home') return <Home />;
+    if (currentProductId === 'comparison') return <ProductComparison />;
     const product = productMap[currentProductId];
     if (product) return <ProductView product={product} />;
 

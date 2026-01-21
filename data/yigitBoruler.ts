@@ -13,24 +13,24 @@ export const yigitBorulerData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (12) ≤ 75. (Maksimum Giriş Yaşı: 63)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.',
+      isMain: true,
       limits: 'Min 10.000 USD',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80)', 
-      description: '12 yıl sonunda hayatta kalma durumunda ödenen brüt primlerin %80\'i iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80)',
+      description: '12 yıl sonunda hayatta kalma durumunda ödenen brüt primlerin %80\'i iade edilir.',
+      isMain: false,
       limits: 'Brüt Primlerin %80\'i',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Teşvik + Yiğit Börüler Ek Ödül (%20 + %2)', 
-      description: 'Tüm primlerin eksiksiz ödenmesi şartıyla %22 ek bonus verilir.', 
-      isMain: false, 
+    {
+      title: 'Teşvik + Yiğit Börüler Ek Ödül (%20 + %2)',
+      description: 'Tüm primlerin eksiksiz ödenmesi şartıyla %22 ek bonus verilir.',
+      isMain: false,
       limits: 'Toplam %22 Ek İade',
       impactOnPolicy: 'Toplam iade %102\'ye ulaşır.'
     }
@@ -46,7 +46,7 @@ export const yigitBorulerData: ProductData = {
     'Yasa dışı eylemler'
   ],
   lifecycle: {
-    tenzil: '12 ay sonra dondurulabilir. Tenzil durumunda vade sonu iadesi sadece ana iade (%80) üzerinden yapılır.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay sonra prim ödemeyi bırakıp devam edebilirsiniz. Tenzil durumunda vade sonu iadesi sadece ana iade (%80) üzerinden yapılır.',
     istirak: '12 ay sonra nakit iade alarak ayrılma hakkı. İlk yıl iade sıfırdır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

@@ -13,24 +13,24 @@ export const rop8020KritikHastalikData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre ≤ 75. (12 yıl için max giriş 63, 15 yıl için 60 yaş)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı',
+      description: 'Hastalık veya kaza sonucu vefat durumunda lehtarlara ödenir.',
+      isMain: true,
       limits: 'Min 10.000 USD',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Kritik Hastalıklar (2X)', 
-      description: '17 kritik hastalıktan birinin teşhisinde vefat teminatının tam 2 KATI ödenir.', 
-      isMain: true, 
+    {
+      title: 'Kritik Hastalıklar (2X)',
+      description: '17 kritik hastalıktan birinin teşhisinde vefat teminatının tam 2 KATI ödenir.',
+      isMain: true,
       limits: 'Vefat Teminatının 2 Katı',
       impactOnPolicy: 'Ödeme yapıldığında poliçe sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%100)', 
-      description: 'Risk gerçekleşmezse primlerin %80\'i + %20 teşvik ödülüyle tamamı iade edilir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%100)',
+      description: 'Risk gerçekleşmezse primlerin %80\'i + %20 teşvik ödülüyle tamamı iade edilir.',
+      isMain: false,
       limits: 'Ödenen brüt primlerin %100\'ü',
       impactOnPolicy: 'Vade sonunda ödenir.'
     }
@@ -143,7 +143,7 @@ export const rop8020KritikHastalikData: ProductData = {
     'AIDS ile ilişkili hastalıklar veya nükleer rizikolar'
   ],
   lifecycle: {
-    tenzil: '12 ay sonra dondurma hakkı. Tenzil durumunda vefat teminatı ödenmiş prim oranına göre indirgenir.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay sonra prim ödemeyi bırakıp, poliçeyi daha düşük teminatlarla devam ettirebilirsiniz. Tenzil durumunda vefat teminatı ödenmiş prim oranına göre indirgenir.',
     istirak: '12 ay sonra nakit iade alarak ayrılma hakkı. Erken ayrılmada kesinti oranları uygulanır.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },

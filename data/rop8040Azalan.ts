@@ -13,24 +13,24 @@ export const rop8040AzalanData: ProductData = {
   renewal: 'Sabit Süreli (Yenilemesiz)',
   maxAgeFormula: 'Giriş Yaşı + Süre (12) ≤ 75. (Maksimum Giriş Yaşı: 63)',
   coverages: [
-    { 
-      title: 'Vefat Teminatı (Azalan)', 
-      description: 'Hastalık veya kaza sonucu vefat durumunda o yılki güncel (azalmış) bedel ödenir.', 
-      isMain: true, 
+    {
+      title: 'Vefat Teminatı (Azalan)',
+      description: 'Hastalık veya kaza sonucu vefat durumunda o yılki güncel (azalmış) bedel ödenir.',
+      isMain: true,
       limits: 'Yıllık Azalan (Süre sonunda sıfırlanır)',
       impactOnPolicy: 'Sözleşme sonlanır.'
     },
-    { 
-      title: 'Süre Sonu İade (%80)', 
-      description: 'Risk gerçekleşmezse hayatta kalma teminatı olarak ödenir.', 
-      isMain: false, 
+    {
+      title: 'Süre Sonu İade (%80)',
+      description: 'Risk gerçekleşmezse hayatta kalma teminatı olarak ödenir.',
+      isMain: false,
       limits: 'Brüt Primlerin %80\'i',
       impactOnPolicy: 'Vade sonunda ödenir.'
     },
-    { 
-      title: 'Dev Bonus (%40 Teşvik)', 
-      description: 'Tüm primlerin eksiksiz ödenmesi şartıyla verilen ekstra ödüldür.', 
-      isMain: false, 
+    {
+      title: 'Dev Bonus (%40 Teşvik)',
+      description: 'Tüm primlerin eksiksiz ödenmesi şartıyla verilen ekstra ödüldür.',
+      isMain: false,
       limits: 'Brüt Primlerin %40\'ı',
       impactOnPolicy: 'Toplam iade %120\'ye ulaşır.'
     }
@@ -46,7 +46,7 @@ export const rop8040AzalanData: ProductData = {
     'Beyan edilmeyen kronik rahatsızlıklar'
   ],
   lifecycle: {
-    tenzil: '12 ay sonra dondurma hakkı. Tenzil durumunda vefat teminatı TTK 1502\'ye göre yeniden hesaplanır.',
+    tenzil: 'Prim ödemeyi durdurmak demektir. 12 ay sonra prim ödemeyi bırakıp devam edebilirsiniz. Tenzil durumunda vefat teminatı TTK 1502\'ye göre yeniden hesaplanır.',
     istirak: '12 ay sonra ayrılma hakkı. Erken ayrılmada %40 bonus yanar.',
     istirakTable: [
       { label: '0-12. Ay', rate: '%100 Kesinti' },
