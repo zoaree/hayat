@@ -220,7 +220,7 @@ const Home: React.FC = () => {
               <div className="absolute -top-12 -left-12 w-48 h-48 bg-orange-400/20 rounded-full blur-3xl opacity-50"></div>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-900 text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 shadow-xl shadow-slate-900/10">
                 <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-                ViennaLife Akademi v4.0
+                Hayat Sigortası v4.0
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-slate-900 leading-[0.9] tracking-tight">
                 Danışman <br />

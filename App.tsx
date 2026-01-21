@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import ProductView from './components/ProductView';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { usePageTracking } from './hooks/usePageTracking';
 import { turuncuElmaData } from './data/turuncuElma';
 import { rop8020Data } from './data/rop8020';
 import { rop8020FerdiKazaData } from './data/rop8020FerdiKaza';
@@ -51,9 +55,36 @@ const productMap: Record<string, any> = {
   'isveren-rop-80-20-karma-ferdi-kaza-maluliyet': isverenRop8020KarmaFerdiKazaMaluliyetData,
 };
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { isAuthenticated, isLoading, user, logout } = useAuth();
   const [currentProductId, setCurrentProductId] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
+
+  // Track page visits
+  usePageTracking(currentProductId);
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-slate-400">Yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Not authenticated - show login
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={() => { }} />;
+  }
+
+  // Admin dashboard
+  if (showAdmin && user?.is_admin) {
+    return <AdminDashboard onBack={() => setShowAdmin(false)} />;
+  }
 
   const getPageTitle = () => {
     if (currentProductId === 'home') return 'Ana Sayfa';
@@ -111,12 +142,34 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4 shrink-0">
+            {user?.is_admin && (
+              <button
+                onClick={() => setShowAdmin(true)}
+                className="px-3 py-1.5 bg-purple-100 text-purple-600 rounded-lg text-xs font-bold hover:bg-purple-200 transition-colors"
+              >
+                Admin
+              </button>
+            )}
             <div className="text-right hidden sm:block">
-              <p className="text-xs font-bold text-slate-900 leading-none">Finansal Danışman</p>
-              <p className="text-[10px] text-slate-500 uppercase font-medium tracking-wide">Eğitim Modu</p>
+              <p className="text-xs font-bold text-slate-900 leading-none">{user?.first_name} {user?.last_name}</p>
+              <p className="text-[10px] text-slate-500 uppercase font-medium tracking-wide">{user?.is_admin ? 'Yönetici' : 'Danışman'}</p>
             </div>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white">
-              FD
+            <div className="relative group">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white cursor-pointer">
+                {user?.first_name?.[0]}{user?.last_name?.[0]}
+              </div>
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                <div className="p-3 border-b border-slate-100">
+                  <p className="text-sm font-bold text-slate-900">{user?.first_name} {user?.last_name}</p>
+                  <p className="text-xs text-slate-500">{user?.email}</p>
+                </div>
+                <button
+                  onClick={logout}
+                  className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                >
+                  Çıkış Yap
+                </button>
+              </div>
             </div>
           </div>
         </header>
@@ -137,7 +190,6 @@ const App: React.FC = () => {
         }
 
         /* DEFINITIVE SCROLLBAR HIDING */
-        /* Forces all scrollbars to be hidden across the entire app */
         * {
           -ms-overflow-style: none !important;
           scrollbar-width: none !important;
@@ -151,7 +203,6 @@ const App: React.FC = () => {
           -webkit-appearance: none !important;
         }
 
-        /* Ensure specific elements also obey */
         body, html, #root, .no-scrollbar {
           scrollbar-width: none !important;
           -ms-overflow-style: none !important;
@@ -161,4 +212,13 @@ const App: React.FC = () => {
   );
 };
 
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
+
 export default App;
+
