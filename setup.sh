@@ -52,11 +52,22 @@ apt install -y curl wget git unzip software-properties-common
 # ============================================
 # 3. PHP 8.2+ Kurulumu
 # ============================================
-echo -e "${GREEN}🐘 [3/7] PHP 8.2 kurulumu...${NC}"
-add-apt-repository ppa:ondrej/php -y
-apt update -y
-apt install -y php8.2 php8.2-cli php8.2-common php8.2-curl php8.2-mbstring \
-    php8.2-xml php8.2-zip php8.2-sqlite3 php8.2-bcmath php8.2-tokenizer
+echo -e "${GREEN}🐘 [3/7] PHP Kontrolü ve Kurulumu...${NC}"
+
+if command -v php &> /dev/null; then
+    PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
+    echo -e "${GREEN}✅ PHP zaten yüklü: $PHP_VERSION${NC}"
+else
+    echo -e "${YELLOW}⚠️ PHP bulunamadı, kuruluyor...${NC}"
+    # Hata olursa durmasın diye set +e
+    set +e
+    add-apt-repository ppa:ondrej/php -y
+    apt update -y
+    set -e
+    
+    apt install -y php8.2 php8.2-cli php8.2-common php8.2-curl php8.2-mbstring \
+        php8.2-xml php8.2-zip php8.2-sqlite3 php8.2-bcmath php8.2-tokenizer
+fi
 
 # Composer kurulumu
 if ! command -v composer &> /dev/null; then
